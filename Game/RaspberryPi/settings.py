@@ -1,6 +1,7 @@
+import gpiozero
 from gpiozero import Button, LED, LEDCharDisplay
 
-PINS = [
+PINS: list[gpiozero.Button] = [
     None,
     None,
     None,
@@ -11,9 +12,7 @@ PINS = [
     None,
 ]
 
-LEDS = {
+LEDS: dict[str: gpiozero.LED] = {
     "CORRECT": None,
     "INCORRECT": None,
 }
-
-DISPLAY = None
