@@ -1,5 +1,4 @@
 import gpiozero
-from gpiozero import Button, LED, LEDCharDisplay
 
 PINS: list[gpiozero.Button] = [
     None,

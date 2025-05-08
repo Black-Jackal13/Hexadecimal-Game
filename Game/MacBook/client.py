@@ -13,8 +13,11 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((SERVER, PORT))
 
 # Test Message
-msg = server.recv(1024).__str__()
-print(msg)
+message = server.recv(1024).decode()
+letters = message[:2]
+dot_states = message[2:]
+print(letters)
+print(dot_states)
 
 # Create Window
 pygame.display.set_caption('Hexadecimal Game')
@@ -27,9 +30,31 @@ background.fill(pygame.Color('#000000'))
 # Create Manager
 manager = pygame_gui.UIManager((800, 600))
 
-# Buttons
-close_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((700, 550), (90, 40)), text='Close',
-                                            manager=manager)
+# Initialize a Font object
+font = pygame.font.Font(None, 160)  # None will use the default font, 160 is the size
+
+# Render the character onto a new surface
+character_surface = font.render(letters, True, pygame.Color('#FFFFFF'))  # Change 'A' to whatever character you want
+
+# Get the size of the rendered character
+char_width, char_height = character_surface.get_size()
+
+# Calculate position to centre the character
+center_x = (800 - char_width) // 2  # 800 is the screen width
+center_y = (600 - char_height) // 2  # 600 is the screen height
+
+# Bit Colours
+GREEN = pygame.Color('green')
+GRAY = pygame.Color('gray')
+
+# Dot settings
+num_dots = 8
+dot_radius = 10
+dot_y = 500
+
+# Distribute dots evenly across the screen width
+dot_spacing = 800 // (num_dots + 1)  # Spacing between dots
+dot_positions = [(dot_spacing * (i + 1), dot_y) for i in range(num_dots)]
 
 # Runtime variables
 clock = pygame.time.Clock()
@@ -43,16 +68,23 @@ while running:
             running = False
             break
 
-        if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == close_button:
-                running = False
-                break
-
         manager.process_events(event)
 
     manager.update(time_delta)
 
     window_surface.blit(background, (0, 0))
+
+    # Draw the character at the calculated position
+    window_surface.blit(character_surface, (center_x, center_y))
+
+    # Draw the dots
+    for i, (x, y) in enumerate(dot_positions):
+        color = GREEN if dot_states[i] == "1" else GRAY
+        pygame.draw.circle(window_surface, color, (x, y), dot_radius)
+
     manager.draw_ui(window_surface)
 
     pygame.display.update()
+
+
+server.close()

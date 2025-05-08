@@ -9,8 +9,10 @@ server.bind((SERVER, PORT))
 
 # Connect to Host
 server.listen()
+print(f"Server is listening on {SERVER}:{PORT}...")
 client, address = server.accept()
 print(f"Connection from {address} has been established!")
 
-client.send(b"Connected to the server!")
+client.send(b"EB00010001")
 client.close()
+server.close()
