@@ -1,13 +1,13 @@
 
-def hexadecimal_to_binary(letter):
+def hexadecimal_to_binary(letters):
     """
-    converts a single hexadecimal character to its binary coded equivalent as a
-    4-bit string.
-    :param letter: a single character representing a hexadecimal digit.
-    :type letter: str
-    :return: The 4-bit binary representation of the input character.
+    converts two hexadecimal characters to its binary coded equivalent as a
+    8-bit string.
+    :param letters: two characters representing the hexadecimal digits.
+    :type letters: str
+    :return: The 8-bit binary representation of the input characters.
     :rtype: str
-    :raises KeyError: If the input character is not valid and not found in the
+    :raises KeyError: If the input characters are not valid and not found in the
         predefined conversion dictionary.
     """
     conversion = {
@@ -29,14 +29,14 @@ def hexadecimal_to_binary(letter):
         "F": "1111"
     }
 
-    return conversion[letter]
+    return conversion[letters[0]] + conversion[letters[1]]
 
 
 def binary_to_hexadecimal(coding):
     """
-    convert a 4-bit binary string to its hexadecimal representation.
+    convert an 8-bit binary string to its hexadecimal representation.
 
-    :param coding: a 4-bit binary string.
+    :param coding: an 8-bit binary string.
     :return: the hexadecimal representation of the binary input as a string.
     :rtype: str
     """
@@ -59,4 +59,4 @@ def binary_to_hexadecimal(coding):
         "1111": "F"
     }
 
-    return conversion[coding]
+    return conversion[coding[:4]] + conversion[coding[4:]]
