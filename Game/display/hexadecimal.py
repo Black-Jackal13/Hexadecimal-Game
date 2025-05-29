@@ -27,7 +27,6 @@ class Hexadecimal:
         self._letters = new_letters.upper()
 
     def draw_hexadecimal(self, screen):
-        # TODO: blit characters to surface
         character_surface = self.font.render(self._letters, True, self.colour)
 
         # Get the size of the rendered character

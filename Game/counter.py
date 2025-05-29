@@ -1,3 +1,6 @@
+import random
+
+
 class Counter:
     def __init__(self, start=0):
         if not 0 <= start <= 255:
@@ -13,6 +16,10 @@ class Counter:
 
     def get_binary(self):
         return format(self.count, '08b')
+
+    def random(self):
+        self.count = random.randint(0, 255)
+        return self.get_binary()
 
 
 if __name__ == '__main__':
