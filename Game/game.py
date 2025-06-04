@@ -246,7 +246,6 @@ def translate_hexadecimal_to_binary():
 
                 # Enter Key (Submit)
                 if event.key == pygame.K_RETURN:
-                    # TODO: Submission Logic
                     print(values)
                     if values == goal:
                         correct = pygame.font.Font(None, 160).render("Correct", False, pygame.Color('green'))
